@@ -1,0 +1,51 @@
+.Content-items-in-collection {
+    /* background-color: #fff; */
+    color: #627399;
+    margin: 1em auto;
+    width: 90%;
+    border-radius: 5px;
+  }
+
+.Content-items {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  max-width: 100%;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 0.7fr));
+  gap: 24px;
+}
+
+.Content-item {
+  display: flex;
+  position: relative;
+  border-radius: 16px;
+  background-color: rgb(194, 226, 207);
+  flex-direction: column;
+  /* transition: all 0.4s ease-in-out; */
+  overflow: hidden;
+} 
+
+.Content-item-image {
+  margin: 0;
+  padding: 0;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  max-width: 100%;
+}
+
+.Content-item-image > img {
+  transform-origin: center;
+  transform: scale(var(--img-scale));
+  /* transition: transform 0.4s ease-in-out; */
+  max-width: 100%;
+  height: auto;
+  vertical-align: bottom;
+  
+}
+
+.Content-item-body {
+  margin-left: 10px;
+}
+

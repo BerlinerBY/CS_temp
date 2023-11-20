@@ -1,0 +1,101 @@
+.SideBar {
+    text-align: left;
+    background-color: #282c34;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    min-width: 250px;
+    align-items: left;
+    justify-content: left;
+    font-size: calc(10px + 2vmin);
+    color: white;
+    overflow-y: scroll;
+}
+  
+.SideBar-header {
+    display: flex;
+    height: 50px;
+    align-items: center;
+}
+
+.header-action {
+    display: flex;
+    margin-left: 5px;
+    width: 80%;
+    height: 90%;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.header-button {
+    margin-left: 5%;
+    margin-right: 5px;
+    width: 15%;
+    height: 75%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header-action:hover {
+    background-color: #515c74;
+    border-radius: 12px;
+} 
+.header-button:hover {
+    background-color: #515c74;
+    border-radius: 12px;
+} 
+
+.SideBar-buttons {
+    display: flex;
+    width: 100%;
+    height: 130px;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.SideBar-button {
+    display: flex;
+    margin-left: 5px;
+    height: 33%;
+    width: 95%;
+    align-items: center;
+    justify-content: space-around;
+    
+}
+
+.div-between {
+    margin-left: auto;
+  }
+
+.icon-button, .title-button {
+    margin-left: 3px;
+}
+.info-count-items {
+    margin-right: 3px;
+}
+
+.SideBar-button:hover {
+    background-color: #515c74;
+    border-radius: 12px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .SideBar-logo {
+      animation: App-logo-spin infinite 20s linear;
+    }
+}
+  
+.SideBar-link {
+    color: #61dafb;
+}
+  
+@keyframes App-logo-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+}
+  
