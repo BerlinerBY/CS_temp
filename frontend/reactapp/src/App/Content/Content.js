@@ -1,7 +1,6 @@
 import './Content.css'
 import ContentChecking from './ContentChecking';
-import { useSelector, connect } from 'react-redux'
-import React, {useState, useEffect} from 'react';
+import React, { useState } from 'react';
 import ContentByCollection from './ContentByCollection/ContentByCollection'
 
 

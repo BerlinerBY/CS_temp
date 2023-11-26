@@ -12,7 +12,7 @@ class ContentByCollection extends React.Component {
     };
     getUrl(url) {
         let domain = new URL(url);
-        if (domain.hostname.indexOf("www.") == -1){
+        if (domain.hostname.indexOf("www.") === -1){
             return domain.hostname
         } else {
             return domain.hostname.slice(4)
@@ -27,7 +27,7 @@ class ContentByCollection extends React.Component {
                 {items.length > 0 && (
                     <div className="Content-items">
                         {items.map(item => (
-                            <div className="Content-item">
+                            <div key={item.id} className="Content-item">
                                 <div className="Content-item-image">
                                     <img src="https://i.imgur.com/h3b4KZI.jpeg" alt="" />
                                 </div>

@@ -27,24 +27,24 @@
     justify-content: space-around;
 }
 
-.header-button {
+/* .header-button {
     margin-left: 5%;
     margin-right: 5px;
     width: 15%;
     height: 75%;
     display: flex;
     align-items: center;
-    justify-content: center;
-}
+    justify-content: center; 
+}*/
 
 .header-action:hover {
     background-color: #515c74;
     border-radius: 12px;
 } 
-.header-button:hover {
+/* .header-button:hover {
     background-color: #515c74;
     border-radius: 12px;
-} 
+}  */
 
 .SideBar-buttons {
     display: flex;
