@@ -3,6 +3,7 @@ import { useSelector, connect } from 'react-redux'
 import React, {useState, useEffect} from 'react';
 import ContentByCollection from './ContentByCollection/ContentByCollection'
 
+
 function Content() {
     const urlPath = useSelector((state) => state.getter.value);
     const [items, setItem] = useState([]);
