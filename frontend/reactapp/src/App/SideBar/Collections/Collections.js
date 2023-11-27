@@ -53,7 +53,9 @@ function Collections() {
                     <div>
                         {collections.map(collection => (
                             <div key={collection.id} className="SideBar-collection">
-                                <div className='SideBar-collection-button' role='button' onClick={() => dispath(incremetNewChunk('collection/' + collection.id))}>
+                                <div className='SideBar-collection-button' 
+                                    role='button' 
+                                    onClick={() => dispath(incremetNewChunk('collection/' + collection.id))}>
                                     <div className="icon-button">
                                         <img src={folder_icon} className="SideBar-user-icon" alt="icon" />
                                     </div>

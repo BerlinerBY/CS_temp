@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import plus_icon from '../../icons/plus.png';
+import plus_icon from '../../../icons/plus.png';
 
 import './ModalWindow.css'
 

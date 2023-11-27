@@ -1,5 +1,5 @@
-import user_icon from './icons/user.png';
-import arrow_icon from './icons/arrow-navigate.png';
+import user_icon from '../icons/user.png';
+import arrow_icon from '../icons/arrow-navigate.png';
 import './SideBar.css'
 import Collections from './Collections/Collections';
 

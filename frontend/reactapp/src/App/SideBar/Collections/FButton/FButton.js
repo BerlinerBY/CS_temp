@@ -45,7 +45,7 @@ function FButton({ deleteRequest, collectionId}) {
                 ) : (
                     <p>I</p>
                 )} */}
-                <Dropdown className="dropdown-div" 
+                <Dropdown id="dropdown-div" 
                         autoClose={false}
                         onClick={action => {
                             if (action.target.id === "dropdown-remove") {
@@ -54,7 +54,7 @@ function FButton({ deleteRequest, collectionId}) {
                         }}>
                     <DropdownButton id="dropdown-b-c" title={fButtonIcon}>
                         <Dropdown.Item as="button">Select</Dropdown.Item>
-                        <Dropdown.Item as="button">Action 1</Dropdown.Item>
+                        <Dropdown.Item as="button">Create Bookmark</Dropdown.Item>
                             <Dropdown.Divider /> 
                         <Dropdown.Item as="button" id="dropdown-remove">Remove</Dropdown.Item>
                     </DropdownButton>

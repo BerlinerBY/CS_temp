@@ -19,12 +19,16 @@
 }
 
 .Category-field {
-  margin-top: 10px;
-  margin-left: 10px;
   width: 150px;
-  height: 35px;
+  height: 40px;
   background-color: #627399;
   border-radius: 20px;
+}
+
+.Category-field-button {
+  margin-top: 10px;
+  margin-left: 10px;
+  display: flex;  
 }
 
 .Category-field > p {

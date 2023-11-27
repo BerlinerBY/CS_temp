@@ -2,7 +2,7 @@ import './Content.css'
 import ContentChecking from './ContentChecking';
 import React, { useState } from 'react';
 import ContentByCollection from './ContentByCollection/ContentByCollection'
-
+import CreateBookmark from './CreateBookmark/CreateBookmark';
 
 function Content() {
     const [items, setItem] = useState([]);
@@ -13,25 +13,28 @@ function Content() {
 
     return (
         <div className="Content">
-        <header className="Content-header">
-            <div className="SearchBar"></div>
-            <div className="Category-field">
-                <p>Category</p>
+            <div className="Content-header">
+                <div className="SearchBar"></div>
+            </div>
+            <div className='Category-field-button'>
+                <div className="Category-field">
+                    <p>Bookmarks</p>
+                </div>
+                <CreateBookmark />
             </div>
             <hr></hr>
-        </header>
-        <div className='Content-main'>
-            <ContentChecking getItems={getItems} />
-            {(() => {
-            if (items.length >= 1){
-                return (
-                    <ContentByCollection items={items}/>
-                )
-            }
-            return null;
-            })()}
+            <div className='Content-main'>
+                <ContentChecking getItems={getItems} />
+                {(() => {
+                if (items.length >= 1){
+                    return (
+                        <ContentByCollection items={items}/>
+                    )
+                }
+                return null;
+                })()}
+            </div>
         </div>
-    </div>
     )
 }
 

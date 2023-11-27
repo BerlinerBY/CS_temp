@@ -3,15 +3,16 @@
     width: 40px;
     margin-right: 3px;
     text-align: center;
+    display: flex;
+    align-items: center;
 }
-
 
 .dropdown-toggle::after {
     content: none;
 }
 
-
 #dropdown-b-c {
+    display: flex;
     height: 40px;
     width: 40px;
     border-radius: 12px;
