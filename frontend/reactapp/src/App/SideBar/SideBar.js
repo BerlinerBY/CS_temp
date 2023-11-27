@@ -23,35 +23,35 @@ function SideBar() {
             </header>
             <div className="SideBar-header-buttons">
                 <div className="SideBar-buttons">
-                    <div className="SideBar-button" role='button' onClick={() => dispath(incremetNewChunk('items/'))}>
+                    <div className="SideBar-button" role='button' onClick={() => dispath(incremetNewChunk({'path':'items/', 'collection': 0}))}>
                         <div className="icon-button">
                             <img src={user_icon} className="SideBar-user-icon" alt="icon" />
                         </div>
                         <div className="title-button">
                             <p className="superlink">All bookmarks</p>
                         </div>
-                        <div class="div-between"></div>
+                        <div className="div-between"></div>
                         <div className="info-count-items">I</div>
                         
                     </div>
-                    <div className="SideBar-button" role='button' onClick={() => dispath(incremetNewChunk('items/'))}>
+                    <div className="SideBar-button" role='button' onClick={() => dispath(incremetNewChunk({'path':'items/', 'collection': 0}))}>
                         <div className="icon-button">
                             <img src={user_icon} className="SideBar-user-icon" alt="icon" />
                         </div>
                         <div className="title-button">
                             <p>Unsorted</p>
                         </div>
-                        <div class="div-between"></div>
+                        <div className="div-between"></div>
                         <div className="info-count-items">I</div>
                     </div>
-                    <div className="SideBar-button" role='button' onClick={() => dispath(incremetNewChunk('items/'))}>
+                    <div className="SideBar-button" role='button' onClick={() => dispath(incremetNewChunk({'path':'items/', 'collection': 0}))}>
                         <div className="icon-button">
                             <img src={user_icon} className="SideBar-user-icon" alt="icon" />
                         </div>
                         <div className="title-button">
                             <p>Trash</p>
                         </div>
-                        <div class="div-between"></div>
+                        <div className="div-between"></div>
                         <div className="info-count-items">I</div>
                     </div>
                 </div>

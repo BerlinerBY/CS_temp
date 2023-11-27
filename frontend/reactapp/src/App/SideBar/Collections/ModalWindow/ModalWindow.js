@@ -33,6 +33,9 @@ function ModalWindow({refreshCollections}) {
         };
         fetch("http://127.0.0.1:8000/api/collections/", requestOptions)
             .then(response => response.json())
+            .catch(error => {
+                console.error(error);
+            });
     };
 
     return (

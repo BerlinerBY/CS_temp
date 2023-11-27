@@ -1,8 +1,9 @@
 import { connect } from 'react-redux'
 import { useEffect } from 'react';
 
-function ContentChecking({ getItems, urlPath }) {
+function ContentChecking({ getItems, urlPath , collectionID, refreshValue}) {
     const url = urlPath;
+    const refresh = refreshValue; 
 
     const fetchItemsData = () => {
         fetch(url)
@@ -11,18 +12,27 @@ function ContentChecking({ getItems, urlPath }) {
         })
         .then(data => {
             getItems({
-                'data': data,})
+                'data': data,
+                'collectionID': collectionID})
         })
+        .catch(error => {
+            console.error(error);
+        });
     };
     
     useEffect(() => {
         fetchItemsData();
     }, [url]);
+
+    useEffect(() => {
+        fetchItemsData();
+    }, [refresh])
 }
 
 function mapStateToProps(state) {
     return {
-        urlPath: state.getter.value,
+        urlPath: state.getter.urlField,
+        collectionID: state.getter.collectionID,
     };
 }
 

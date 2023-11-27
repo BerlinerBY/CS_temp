@@ -14,17 +14,23 @@ function Collections() {
     const dispath = useDispatch();
     
     const refreshCollections = () => {
-        setRefresh(refresh_v + 1)
+        setRefresh(refresh_v + 1);
     };
 
     const fetchCollectionsData = () => {
-        fetch(apiUrl)
-        .then(response => {
-            return response.json()
-        })
-        .then(data => {
-            setCollection(data);
-        })
+        const requestOptions = {
+            method: 'GET'
+        };
+        fetch(apiUrl, requestOptions)
+            .then(response => {
+                return response.json();
+            })
+            .then(data => {
+                setCollection(data);
+            })
+            .catch(error => {
+                console.error(error);
+            });
     };
 
     const deleteRequest = (collectionId) => {
@@ -35,6 +41,9 @@ function Collections() {
             apiUrl+ "delete/" + collectionId,
             requestOptions)
             .then(data => {refreshCollections();})
+            .catch(error => {
+                console.error(error);
+            });
     };
 
     useEffect(() => {
@@ -54,8 +63,8 @@ function Collections() {
                         {collections.map(collection => (
                             <div key={collection.id} className="SideBar-collection">
                                 <div className='SideBar-collection-button' 
-                                    role='button' 
-                                    onClick={() => dispath(incremetNewChunk('collection/' + collection.id))}>
+                                    role='button'
+                                    onClick={() => dispath(incremetNewChunk({'path': 'collection/' + collection.id, 'collection': collection.id}))}>
                                     <div className="icon-button">
                                         <img src={folder_icon} className="SideBar-user-icon" alt="icon" />
                                     </div>

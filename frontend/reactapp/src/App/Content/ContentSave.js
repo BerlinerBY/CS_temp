@@ -16,6 +16,9 @@ function Content() {
         .then(data => {
             setItem(data)
         })
+        .catch(error => {
+            console.error(error);
+        });
     };
 
 

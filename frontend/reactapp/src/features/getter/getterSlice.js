@@ -4,11 +4,13 @@ import { createSlice } from "@reduxjs/toolkit";
 export const getterSlice = createSlice({
     name: 'getter',
     initialState: {
-        value: 'http://127.0.0.1:8000/api/items',
+        urlField: 'http://127.0.0.1:8000/api/items',
+        collectionID: 0,
     },
     reducers: {
         incremetNewChunk: (state, action) => {
-            state.value = 'http://127.0.0.1:8000/api/' + action.payload
+            state.urlField = 'http://127.0.0.1:8000/api/' + action.payload['path'];
+            state.collectionID = action.payload['collection'];
         },
     },
 })

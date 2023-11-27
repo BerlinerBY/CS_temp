@@ -7,22 +7,22 @@ import plus_icon from '../../icons/plus.png';
 
 import './CreateBookmark.css'
 
-function CreateBookmark({refreshCollections}) {
+function CreateBookmark({ collectionID, refreshPage }) {
     const [show, setShow] = useState(false);
     const [title, setTitle] = useState('');
-    const [collection, setCollection] = useState('');
+    const [collection, setCollection] = useState(collectionID);
     const [url_field, setURL] = useState('');
     const [description, setDecription] = useState('');
 
     const handleShow = () => setShow(true);
     const handleClose = () => {
         setShow(false);
-        clearState('');
+        clearState();
     }
 
     const clearState = () => {
         setTitle('');
-        setCollection('');
+        setCollection(collectionID);
         setURL('');
         setDecription('');
     }
@@ -43,9 +43,9 @@ function CreateBookmark({refreshCollections}) {
 
     const handleSubmit = () => {
         postRequest();
-        //refreshCollections();
         handleClose();
         clearState();
+        refreshPage(true);
     };
 
     const postRequest = () => {
@@ -89,9 +89,8 @@ function CreateBookmark({refreshCollections}) {
                         <Form.Label>Collection</Form.Label>
                             <Form.Control
                                 type="text"
-                                placeholder="Collection"
                                 autoFocus
-                                value={collection}
+                                defaultValue={collectionID}
                                 onChange={handleCollectionChange}
                             />
                     </Form.Group>

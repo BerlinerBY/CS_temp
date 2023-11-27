@@ -6,10 +6,17 @@ import CreateBookmark from './CreateBookmark/CreateBookmark';
 
 function Content() {
     const [items, setItem] = useState([]);
+    const [collectionID, setCollectionID] = useState(0);
+    const [refreshValue, setRefresh] = useState(false);
 
     const getItems = (data) => {
         setItem(data['data']);
-    }
+        setCollectionID(data['collectionID'])
+    };
+
+    const refreshPage = () => {
+        setRefresh(!refreshValue);
+    };
 
     return (
         <div className="Content">
@@ -18,13 +25,18 @@ function Content() {
             </div>
             <div className='Category-field-button'>
                 <div className="Category-field">
-                    <p>Bookmarks</p>
+                    {/* After add a search in redux store */}
+                    <p>Bookmarks from {collectionID}</p>
                 </div>
-                <CreateBookmark />
+                <CreateBookmark 
+                    collectionID={collectionID}
+                    refreshPage={refreshPage}/>
             </div>
             <hr></hr>
             <div className='Content-main'>
-                <ContentChecking getItems={getItems} />
+                <ContentChecking 
+                    getItems={getItems}
+                    refreshValue={refreshValue} />
                 {(() => {
                 if (items.length >= 1){
                     return (
