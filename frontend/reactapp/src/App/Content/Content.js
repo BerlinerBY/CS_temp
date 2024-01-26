@@ -1,22 +1,18 @@
 import './Content.css'
-import ContentChecking from './ContentChecking';
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import ContentByCollection from './ContentByCollection/ContentByCollection'
-import CreateBookmark from './CreateBookmark/CreateBookmark';
+import CreateUpdateBookmark from '../../ReusableComponents/CreateUpdateBookmark/CreateUpdateBookmark';
+import { connect, useDispatch } from 'react-redux';
+import { getItemRequest } from '../../features/features/ApiRequests/ContentRequests';
 
-function Content() {
-    const [items, setItem] = useState([]);
-    const [collectionID, setCollectionID] = useState(0);
-    const [refreshValue, setRefresh] = useState(false);
+function Content({ itemsByCollection, collectionTitleFromStore, collectionID }) {
+    const items = itemsByCollection;
+    const dispatch = useDispatch();
+    const collectionTitle = collectionTitleFromStore;
 
-    const getItems = (data) => {
-        setItem(data['data']);
-        setCollectionID(data['collectionID'])
-    };
-
-    const refreshPage = () => {
-        setRefresh(!refreshValue);
-    };
+    useEffect(() => {
+        getItemRequest({ collectionID, dispatch });
+    }, [collectionID])
 
     return (
         <div className="Content">
@@ -25,22 +21,20 @@ function Content() {
             </div>
             <div className='Category-field-button'>
                 <div className="Category-field">
-                    {/* After add a search in redux store */}
-                    <p>Bookmarks from {collectionID}</p>
+                    <p>{collectionTitle}</p>
                 </div>
-                <CreateBookmark 
-                    collectionID={collectionID}
-                    refreshPage={refreshPage}/>
+                <CreateUpdateBookmark 
+                    requestFlag={"POST"}
+                    />
             </div>
             <hr></hr>
             <div className='Content-main'>
-                <ContentChecking 
-                    getItems={getItems}
-                    refreshValue={refreshValue} />
                 {(() => {
                 if (items.length >= 1){
                     return (
-                        <ContentByCollection items={items}/>
+                        <ContentByCollection 
+                            items={items}
+                            />
                     )
                 }
                 return null;
@@ -50,4 +44,12 @@ function Content() {
     )
 }
 
-export default Content;
+function displayStateToProps(state) {
+    return {
+        itemsByCollection: state.contReducer.itemsByCollection,
+        collectionTitleFromStore: state.contReducer.collectionTitle,
+        collectionID: state.contReducer.collectionID,
+    };
+}
+
+export default connect(displayStateToProps)(Content);

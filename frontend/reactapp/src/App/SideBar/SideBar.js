@@ -1,13 +1,13 @@
-import user_icon from '../icons/user.png';
-import arrow_icon from '../icons/arrow-navigate.png';
+import user_icon from '../../icons/user.png';
+import arrow_icon from '../../icons/arrow-navigate.png';
 import './SideBar.css'
 import Collections from './Collections/Collections';
 
 import { useDispatch } from 'react-redux';
-import { incremetNewChunk } from '../../features/getter/getterSlice';
+import { incremetCollection } from '../../features/slices/content/contentSlice';
 
 function SideBar() {
-    const dispath = useDispatch()
+    const dispatch = useDispatch()
     return (
         <div className="SideBar">
             <header className="SideBar-header">
@@ -23,7 +23,7 @@ function SideBar() {
             </header>
             <div className="SideBar-header-buttons">
                 <div className="SideBar-buttons">
-                    <div className="SideBar-button" role='button' onClick={() => dispath(incremetNewChunk({'path':'items/', 'collection': 0}))}>
+                    <div className="SideBar-button" role='button' onClick={() => dispatch(incremetCollection({'collection': 0, 'collectionTitle': 'All bookmarks'}))}>
                         <div className="icon-button">
                             <img src={user_icon} className="SideBar-user-icon" alt="icon" />
                         </div>
@@ -34,7 +34,7 @@ function SideBar() {
                         <div className="info-count-items">I</div>
                         
                     </div>
-                    <div className="SideBar-button" role='button' onClick={() => dispath(incremetNewChunk({'path':'items/', 'collection': 0}))}>
+                    <div className="SideBar-button" role='button' onClick={() => dispatch(incremetCollection({'collection': 0, 'collectionTitle': 'Unsorted'}))}>
                         <div className="icon-button">
                             <img src={user_icon} className="SideBar-user-icon" alt="icon" />
                         </div>
@@ -44,7 +44,7 @@ function SideBar() {
                         <div className="div-between"></div>
                         <div className="info-count-items">I</div>
                     </div>
-                    <div className="SideBar-button" role='button' onClick={() => dispath(incremetNewChunk({'path':'items/', 'collection': 0}))}>
+                    <div className="SideBar-button" role='button' onClick={() => dispatch(incremetCollection({'collection': 0, 'collectionTitle': 'Trash'}))}>
                         <div className="icon-button">
                             <img src={user_icon} className="SideBar-user-icon" alt="icon" />
                         </div>

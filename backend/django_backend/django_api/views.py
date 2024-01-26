@@ -5,6 +5,7 @@ from rest_framework.reverse import reverse
 from .models import Collection, Item
 from .serializers import CollectionSerializer, ItemSerialiazer
 
+### COLLECTIONS
 class CollectionsView(generics.ListCreateAPIView):
     """All collections"""
     name="collections_view"
@@ -13,29 +14,45 @@ class CollectionsView(generics.ListCreateAPIView):
     serializer_class = CollectionSerializer
 
 
-class CollectionView(generics.RetrieveUpdateAPIView):
+class CollectionView(generics.RetrieveAPIView):
+    """A collection (GET)"""
+    queryset = Collection.objects.all()
+    serializer_class = CollectionSerializer
+
+class CollectionUpdate(generics.UpdateAPIView):
+    """A collection (PUT and PATCH)"""
     queryset = Collection.objects.all()
     serializer_class = CollectionSerializer
 
 class CollectionDestroy(generics.DestroyAPIView):
+    """Destroy a collection (DELETE)"""
     queryset = Collection.objects.all()
     serializer_class = CollectionSerializer
 
+### ITEMS
 class ItemsView(generics.ListCreateAPIView):
-    """All items"""
+    """Get all items or create (GET and POST)"""
     name="items_view"
 
     queryset = Item.objects.all()
     serializer_class = ItemSerialiazer
 
-class ItemView(generics.RetrieveUpdateAPIView):
+class ItemView(generics.RetrieveAPIView):
+    """An item (GET)"""
+    queryset = Item.objects.all()
+    serializer_class = ItemSerialiazer
+
+class ItemUpdate(generics.UpdateAPIView):
+    """Update an item (PUT and PATCH)"""
     queryset = Item.objects.all()
     serializer_class = ItemSerialiazer
 
 class ItemDestroy(generics.DestroyAPIView):
+    """Destroy an item (DELETE)"""
     queryset = Item.objects.all()
     serializer_class = ItemSerialiazer
 
+### OTHER
 class ItemsByCollection(generics.ListAPIView):
     serializer_class = ItemSerialiazer
 

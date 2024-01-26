@@ -1,5 +1,6 @@
 import React from "react";
-import './ContentByCollection.css'
+import './ContentByCollection.css';
+import CardButtons from "./CardButtons/CardButtons";
 
 class ContentByCollection extends React.Component {
     convertDate(date) {
@@ -20,7 +21,7 @@ class ContentByCollection extends React.Component {
     };
 
     render() {
-        const { items } = this.props;
+        const { items, refreshPage } = this.props;
 
         return (
             <div className="Content-items-in-collection">
@@ -29,6 +30,8 @@ class ContentByCollection extends React.Component {
                         {items.map(item => (
                             <div key={item.id} className="Content-item">
                                 <div className="Content-item-image">
+                                    <CardButtons 
+                                        item={item}/>
                                     <img src="https://i.imgur.com/h3b4KZI.jpeg" alt="" />
                                 </div>
                                 <div className="Content-item-body">

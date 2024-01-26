@@ -1,10 +1,10 @@
 .Content-items-in-collection {
     /* background-color: #fff; */
-    color: #627399;
-    margin: 1em auto;
-    width: 90%;
-    border-radius: 5px;
-  }
+  color: #627399;
+  margin: 1em auto;
+  width: 90%;
+  border-radius: 5px;
+}
 
 .Content-items {
   display: grid;
@@ -33,6 +33,7 @@
   aspect-ratio: 16 / 9;
   overflow: hidden;
   max-width: 100%;
+  position: relative;
 }
 
 .Content-item-image > img {
@@ -42,10 +43,34 @@
   max-width: 100%;
   height: auto;
   vertical-align: bottom;
+  position: absolute;
   
 }
 
 .Content-item-body {
   margin-left: 10px;
 }
+
+
+
+.Content-item:hover {
+  background-color: rgb(160, 194, 174);
+}
+
+.Content-item:hover .Content-item-buttons{
+  opacity: 1;
+}
+
+.Content-item-buttons {
+  position: absolute;
+  opacity: 0;
+  z-index: 2;
+  width: 100%;
+  height: 30px;
+  right: 0;
+  display: flex;  
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
 

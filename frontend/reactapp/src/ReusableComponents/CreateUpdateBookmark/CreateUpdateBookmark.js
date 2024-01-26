@@ -4,15 +4,21 @@ import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import plus_icon from '../../icons/plus.png';
+import { postItemRequest, putItemRequest } from '../../features/features/ApiRequests/ContentRequests.js';
+import { connect, useDispatch } from 'react-redux';
 
-import './CreateBookmark.css'
+import './CreateUpdateBookmark.css'
 
-function CreateBookmark({ collectionID, refreshPage }) {
+function CreateUpdateBookmark({ requestFlag, itemID, 
+                          titleField, collectionID, 
+                          urlField, descriptionField}) {
     const [show, setShow] = useState(false);
-    const [title, setTitle] = useState('');
+    const [title, setTitle] = useState(titleField);
     const [collection, setCollection] = useState(collectionID);
-    const [url_field, setURL] = useState('');
-    const [description, setDecription] = useState('');
+    const [url_field, setURL] = useState(urlField);
+    const [description, setDecription] = useState(descriptionField);
+
+    const dispatch = useDispatch();
 
     const handleShow = () => setShow(true);
     const handleClose = () => {
@@ -21,10 +27,10 @@ function CreateBookmark({ collectionID, refreshPage }) {
     }
 
     const clearState = () => {
-        setTitle('');
+        setTitle(titleField);
         setCollection(collectionID);
-        setURL('');
-        setDecription('');
+        setURL(urlField);
+        setDecription(descriptionField);
     }
 
     // replace 4 functions by 1 with conditions
@@ -42,36 +48,49 @@ function CreateBookmark({ collectionID, refreshPage }) {
     };
 
     const handleSubmit = () => {
-        postRequest();
+        if (requestFlag === "PUT") {
+            putItemRequest(itemID, title, collection, url_field, description, dispatch);
+        } else if (requestFlag === "POST") {
+            postItemRequest(title, collection, url_field, description, dispatch);
+        }
         handleClose();
         clearState();
-        refreshPage(true);
     };
 
-    const postRequest = () => {
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(
-                {
-                    title: title,
-                    collection: collection,
-                    url_field: url_field,
-                    description: description
-                })
-        };
-        fetch("http://127.0.0.1:8000/api/items/", requestOptions)
-            .then(response => response.json())
+    const buttonType = () => {
+        if (requestFlag === 'PUT') {
+            return (
+                <div className="Content-item-button" role="button" onClick={handleShow}>
+                    Edit
+                </div>
+            )
+        } else if (requestFlag === 'POST') {
+            return (
+                <div className="header-button" role='button' onClick={handleShow} >
+                    <img src={plus_icon} className="SideBar-plus-icon" alt="icon" />
+                </div>
+            )
+        }
     };
+
+    const titleType = () => {
+        if (requestFlag === 'PUT') {
+            return (
+                "Edit bookmark"
+            )
+        } else if (requestFlag === 'POST') {
+            return (
+                "Create bookmark"
+            )
+        }
+    }
 
     return (
         <>
-        <div className="header-button" role='button' onClick={handleShow} >
-            <img src={plus_icon} className="SideBar-plus-icon" alt="icon" />
-        </div>
+        {buttonType()}
         <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
-                <Modal.Title>Create collection</Modal.Title>
+                <Modal.Title>{titleType()}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <Form>
@@ -81,7 +100,7 @@ function CreateBookmark({ collectionID, refreshPage }) {
                                 type="text"
                                 placeholder="New item"
                                 autoFocus
-                                value={title}
+                                defaultValue={titleField}
                                 onChange={handleTitleChange}
                             />
                     </Form.Group>
@@ -89,7 +108,6 @@ function CreateBookmark({ collectionID, refreshPage }) {
                         <Form.Label>Collection</Form.Label>
                             <Form.Control
                                 type="text"
-                                autoFocus
                                 defaultValue={collectionID}
                                 onChange={handleCollectionChange}
                             />
@@ -99,18 +117,16 @@ function CreateBookmark({ collectionID, refreshPage }) {
                             <Form.Control
                                 type="text"
                                 placeholder="https://kangaroo.by"
-                                autoFocus
-                                value={url_field}
+                                defaultValue={urlField}
                                 onChange={handleURLChange}
                             />
-                    </Form.Group>
+                        </Form.Group>
                     <Form.Group className="mb-3" controlId="ControlInput">
                          <Form.Label>Description</Form.Label>
                             <Form.Control
                                 type="text"
                                 placeholder="Description"
-                                autoFocus
-                                value={description}
+                                defaultValue={descriptionField}
                                 onChange={handleDescriptionChange}
                             />
                     </Form.Group>
@@ -129,4 +145,11 @@ function CreateBookmark({ collectionID, refreshPage }) {
     );
 }
 
-export default CreateBookmark;
+
+function displayStateToProps(state) {
+    return {
+        collectionID: state.contReducer.collectionID,
+    };
+}
+
+export default connect(displayStateToProps)(CreateUpdateBookmark);

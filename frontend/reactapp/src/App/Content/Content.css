@@ -32,6 +32,8 @@
 }
 
 .Category-field > p {
+  font-size: calc(10px + 1.5vh);
+  height: inherit;
   display: flex;
   align-items: center;
   justify-content: center;

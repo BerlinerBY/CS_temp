@@ -1,61 +1,36 @@
 import './Collections.css';
 import folder_icon from './folder.png';
-import React, {useState, useEffect} from 'react';
-import { useDispatch } from 'react-redux';
-import { incremetNewChunk } from '../../../features/getter/getterSlice';
-import ModalWindow from './ModalWindow/ModalWindow';
-import FButton from './FButton/FButton';
+import plus_icon from '../../../icons/plus.png';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, connect } from 'react-redux';
+import { incremetCollection } from '../../../features/slices/content/contentSlice.js';
+import ModalWindow from '../../../ReusableComponents/ModalWindow/ModalWindow.js';
+import FButton from '../../../ReusableComponents/FButton/FButton.js';
+import { getCollectionRequest } from '../../../features/features/ApiRequests/SideBarRequests.js';
 
-
-function Collections() {
-    const [collections, setCollection] = useState([]);
-    const [refresh_v, setRefresh] = useState(0);
-    const apiUrl = "http://127.0.0.1:8000/api/collections/";
-    const dispath = useDispatch();
-    
-    const refreshCollections = () => {
-        setRefresh(refresh_v + 1);
-    };
-
-    const fetchCollectionsData = () => {
-        const requestOptions = {
-            method: 'GET'
-        };
-        fetch(apiUrl, requestOptions)
-            .then(response => {
-                return response.json();
-            })
-            .then(data => {
-                setCollection(data);
-            })
-            .catch(error => {
-                console.error(error);
-            });
-    };
-
-    const deleteRequest = (collectionId) => {
-        const requestOptions = {
-            method: 'DELETE'
-        };
-        fetch(
-            apiUrl+ "delete/" + collectionId,
-            requestOptions)
-            .then(data => {refreshCollections();})
-            .catch(error => {
-                console.error(error);
-            });
-    };
+function Collections({ collectionsFromStore }) {
+    const collections = collectionsFromStore;
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        fetchCollectionsData();
-    }, [refresh_v]);
+        getCollectionRequest(dispatch);
+    }, []);
+
+    const [show, setShow] = useState(false);
+    const handleShow = () => setShow(true);
 
     return (
         <>
             <div className='my-collections'>
                 <div className="title">My collections</div>
                 <div className="div-between"></div>
-                <ModalWindow refreshCollections={refreshCollections}/>
+                <div className="header-button" role='button' onClick={() => handleShow()} >
+                    <img src={plus_icon} className="SideBar-plus-icon" alt="icon" />
+                </div>
+                <ModalWindow
+                    requestFlag={'POST'}
+                    setShow={setShow}
+                    show={show}/>
             </div>
             <div className="SideBar-collections">
                 {collections.length > 0 && (
@@ -64,7 +39,7 @@ function Collections() {
                             <div key={collection.id} className="SideBar-collection">
                                 <div className='SideBar-collection-button' 
                                     role='button'
-                                    onClick={() => dispath(incremetNewChunk({'path': 'collection/' + collection.id, 'collection': collection.id}))}>
+                                    onClick={() => dispatch(incremetCollection({'collection': collection.id, 'collectionTitle': collection.title}))}>
                                     <div className="icon-button">
                                         <img src={folder_icon} className="SideBar-user-icon" alt="icon" />
                                     </div>
@@ -73,8 +48,7 @@ function Collections() {
                                 </div>
                                 <div className='SideBar-collection-add'>
                                     <FButton 
-                                        deleteRequest={deleteRequest} 
-                                        collectionId={collection.id}
+                                        collectionObject={collection}
                                         />
                                 </div>
                             </div>
@@ -87,5 +61,10 @@ function Collections() {
     )
 }
 
+function displayStateToProps(state) {
+    return {
+        collectionsFromStore: state.colReducer.collections,
+    };
+}
 
-export default Collections;
+export default connect(displayStateToProps)(Collections);
